@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/die1Image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/rollResult"
         android:layout_marginTop="25dp"
@@ -31,20 +31,34 @@
 
     <ImageView
         android:id="@+id/die2Image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_below="@+id/rollResult"
-        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@id/die1Image"
         android:layout_marginTop="25dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
         android:src="@drawable/die_1" />
 
     <ImageView
         android:id="@+id/die3Image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/rollResult"
+        android:layout_toLeftOf="@+id/die4Image"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/die_1" />
+
+    <ImageView
+        android:id="@+id/die4Image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/rollResult"
         android:layout_marginTop="25dp"
+
         android:src="@drawable/die_1" />
 
     <TextView

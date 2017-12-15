@@ -40,11 +40,12 @@ public class MainActivity extends AppCompatActivity {
     int die1;
     int die2;
     int die3;
+    int die4;
 
-//  ArrayList to hold all 3 dice values
+//  ArrayList to hold all 4 dice values
     List<Integer> dice;
 
-//  ArrayList to hold all 3 dice images
+//  ArrayList to hold all 4 dice images
     List<ImageView> diceImageViews;
 
     @Override
@@ -79,12 +80,14 @@ public class MainActivity extends AppCompatActivity {
         ImageView dice1Image = findViewById(R.id.die1Image);
         ImageView dice2Image = findViewById(R.id.die2Image);
         ImageView dice3Image = findViewById(R.id.die3Image);
+        ImageView dice4Image = findViewById(R.id.die4Image);
 
         diceImageViews = new ArrayList<>();
 
         diceImageViews.add(dice1Image);
         diceImageViews.add(dice2Image);
         diceImageViews.add(dice3Image);
+        diceImageViews.add(dice4Image);
 
     }
 
@@ -95,14 +98,16 @@ public class MainActivity extends AppCompatActivity {
         die1 = rand.nextInt(6) + 1;
         die2 = rand.nextInt(6) + 1;
         die3 = rand.nextInt(6) + 1;
+        die4 = rand.nextInt(6) + 1;
 
 //      Set dice value into an ArrayList
         dice.clear();
         dice.add(die1);
         dice.add(die2);
         dice.add(die3);
+        dice.add(die4);
 
-        for (int dieOfSet = 0 ; dieOfSet < 3 ; dieOfSet++) {
+        for (int dieOfSet = 0 ; dieOfSet < 4 ; dieOfSet++) {
             String imageName = "die_" + dice.get(dieOfSet) + ".png";
             try {
                 InputStream stream = getAssets().open(imageName);
@@ -117,18 +122,32 @@ public class MainActivity extends AppCompatActivity {
 
         //Build the message with the result
         String msg;
-        if(die1 == die2 && die1 == die3) {
-            //Triple
-            int scoreDelta = die1 * 100;
-            msg = "You rolled a triple " + die1 + "! You score " + scoreDelta + " points";
-            score += scoreDelta;
-        } else if (die1 == die2 || die1 == die3 || die2 == die3) {
-            //Double
-            msg = "You rolled a double for 50 points!";
-            score += 50;
-        }else {
-            msg = "You didn't score this roll. Try again!!";
-        }
+        if(die1 == die2 && die1 == die3 && die1 == die4) {
+            //Quadruple
+            int scoreFour = die1 * 200;
+            msg = "You rolled a quadruple " + die1 + "! You score " + scoreFour + " points.";
+            score += scoreFour;
+        } else
+            if ((die1 == die2 && (die1 == die3 ^ die1 == die4)) ||
+                  (die3 == die4 &&(die3 == die1 ^ die3 == die2))) {
+                    //Triple
+                    msg = "You rolled a triple for 150 points!";
+                    score += 150;
+        } else
+            if ((die1 == die2 && die3 == die4) || (die1 == die3 && die2 == die4) ||
+                  (die1 == die4 && die2 == die3)) {
+                   //2 Doubles
+                   msg = "You rolled 2 doubles for 100 points!";
+                   score += 100;
+        } else
+            if (die1 == die2 ^ die3 == die4 ^ die1 == die3 ^ die2 == die4 ^
+                    die1 == die4 ^ die2 == die3) {
+                   //A Double
+                   msg = "You rolled a double for 50 points!";
+                   score += 50;
+        } else {
+                msg = "You didn't score this roll. Try again!!";
+            }
 
         //Update app to display the result message
         rollResult.setText(msg);
