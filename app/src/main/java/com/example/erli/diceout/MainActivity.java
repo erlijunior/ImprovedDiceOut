@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                    msg = "You rolled a double for 50 points!";
                    score += 50;
         } else {
-                msg = "You didn't score this roll. Try again!!";
+                msg = "You didn't score this roll. Try again!";
             }
 
         //Update app to display the result message
